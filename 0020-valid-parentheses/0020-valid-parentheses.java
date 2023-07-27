@@ -1,81 +1,49 @@
 class Solution {
     public boolean isValid(String s) {
-        Stack<Character> h=new Stack<>();
-        for(char i:s.toCharArray())
-        {
-            if(i=='(')
-            {
-                h.push(i);
+        Stack<Character> s1 = new Stack<>();
+        for(char c : s.toCharArray()){
+            if(c=='('){
+                s1.push(c);
+            }
+            else if(c=='{'){
+                s1.push(c);
+            }
+            else if(c=='['){
+                s1.push(c);
+            }
+            else if(  c==')'){
+                if(s1.empty()){
+                     return false;
+                 }
+                char temp = s1.pop();
+                
+                if(temp!='('){
+                    return false;
+                }
+            }
+             else if(c=='}'){
+                 if(s1.empty()){
+                     return false;
+                 }
+                char temp = s1.pop();
+                 
+                if(temp!='{'){
+                    return false;
+                }
+            }
+             else if(c==']'){
+                 if(s1.empty()){
+                     return false;
+                 }
+                char temp = s1.pop();
+                 
+                if(temp!='['){
+                    return false;
+                }
             }
             
-           else if(i=='[')
-            {
-                h.push(i);
-            }
-            
-           else if(i=='{')
-            {
-                h.push(i);
-            }
-            else if(i==')')
-            {
-                if(!h.isEmpty())
-                {
-                    if(h.peek()=='(')
-                    {
-                        h.pop();
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if(i=='}')
-            {
-                if(!h.isEmpty())
-                {
-                    if(h.peek()=='{')
-                    {
-                        h.pop();
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if(i==']')
-            {
-                if(!h.isEmpty())
-                {
-                    if(h.peek()=='[')
-                    {
-                        h.pop();
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-            }
         }
-        if(h.isEmpty())
-        {
-            return true;
-        }
-        return false;
+        
+        return s1.empty();
     }
 }
